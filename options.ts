@@ -1,23 +1,23 @@
-import { compose } from "./compose";
-
-export type Option<T> = Some<T> | None;
-
-type Some<T> = {
-    _tag: "Some";
+type Some<T> =  {
     value: T;
-};
-type None = {
-    _tag: "None";
-};
+    _tag: "some";
 
-export const some = <T>(x: T): Option<T> => ({
-    _tag: "Some",
+}
+type None= {
+    _tag: "none";
+}
+type Option<T>= Some<T> | None
+
+/** type constructors */
+
+const some= <T>(x:T):Some<T>=>({
     value: x,
-});
+    _tag: "some"
+})
+const none : Option<never>= {_tag: "none"}
 
-// none is a singelton value
-export const none: Option<never> = { _tag: "None" };
+const isNone = <T>(opt:Option<T>): opt is None=> opt._tag === "none" 
 
-// the return value is of type boolean, but we can use type guard "x is "some Type"" to check if x is of that "Type"
-export const isNone = <T>(option: Option<T>): option is None =>
-    option._tag === "None";
+type MaybeNumber = Option<number>;
+
+const divideTwo = (x:number) : MaybeNumber=> x===0 ?none: some(2/x)  

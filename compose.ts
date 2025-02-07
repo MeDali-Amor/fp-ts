@@ -2,7 +2,7 @@ type Incremrnt = (x: number) => number;
 type NumToString = (x: number) => string;
 type Compose = <A, B, C>(f: (y: B) => C, g: (x: A) => B) => (x: A) => C;
 
-const increment: Incremrnt = (x) => x + 1;
+// const increment: Incremrnt = (x) => x + 1;
 
 const numToString: NumToString = (x) => x.toString();
 
